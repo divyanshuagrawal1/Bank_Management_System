@@ -23,28 +23,6 @@ A modern and interactive banking management system developed using Java Swing fo
 - 🛢️ JDBC Driver (`com.mysql.cj.jdbc.Driver`)
 - 🖌️ NetBeans IDE
 
----
-
-## 📂 Project Structure
-
-bank.management.system/
-├── DAO/
-│ ├── UserDAO.java # Handles login, signup, pin update
-│ ├── BalanceDAO.java # Calculates account balance
-│ └── TransactionDAO.java # Adds transactions, fetches mini statements
-├── UI Screens
-│ ├── Login.java
-│ ├── SignupOne.java
-│ ├── SignupTwo.java
-│ ├── SignupThree.java
-│ ├── Transactions.java
-│ ├── Deposit.java
-│ ├── Withdrawal.java
-│ ├── FastCash.java
-│ ├── BalanceEnquiry.java
-│ ├── PinChange.java
-│ └── MiniStatement.java
-├── Conn.java # JDBC Connection class
 
 ---
 
