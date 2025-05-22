@@ -1,0 +1,16 @@
+// DatabaseConnection.java
+import java.sql.*;
+
+public class DatabaseConnection {
+    public static Connection connect() {
+        try {
+            String url = "jdbc:mysql://localhost:3306/library_management";
+            String user = "root";
+            String password = "password"; // Change to your MySQL password
+            return DriverManager.getConnection(url, user, password);
+        } catch (SQLException e) {
+            System.err.println("Database connection failed: " + e.getMessage());
+            return null;
+        }
+    }
+}
