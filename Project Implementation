@@ -1,0 +1,27 @@
+//Database Schema
+
+Schema: banking_system
+ Tables:- login(pin, card_number, password)`- `signupthree(pin, account_type)`- `bank(pin, date, type, amount)
+ This structure supports login, signup, and transactions
+
+//UI Responsiveness Accessibility
+
+Implemented using:- ActionListener for button actions- `JOptionPane` for feedback- Keyboard navigable components
+ Example:
+"java"
+ withdraw.addActionListener(this);
+ JOptionPane.showMessageDialog(null, "Withdraw Successful");
+
+//UI Placement Alignment
+
+All forms use absolute positioning:- setBounds() method for placing elements- Grouped logically (e.g., PIN input together)
+ Code Example from PinChange.java:
+"java"
+ pin.setBounds(330,320,180,25);
+
+//UI Aesthetics
+
+Found in all GUI files (e.g., 'Withdrawl.java', 'Login.java'):- Fonts like Raleway and System- ATM background images- Color contrast used effectively- Code:
+"java"
+ text.setFont(new Font("System", Font.BOLD, 16));
+
