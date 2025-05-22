@@ -10,8 +10,6 @@ public class Conn{
     Statement s ;
     public Conn() {
         
-    
-
         try {
             
             c = DriverManager.getConnection("jdbc:mysql:///bankmanagementsystem","root","Divyan@2006");
