@@ -6,9 +6,17 @@ Schema: banking_system
 
 //DAO Classes
 
-Example: -"User.java" holds data for users 
-         -"BalanceDAO.java" has methods like "getBalance(pin)" 
-         -"UserDAO.java" has "updatePin()"
+Example: 🔹 TransactionDAO.java - 
+             public void addTransaction(String pin, String type, double amount)
+             public List<String> getMiniStatement(String pin)
+
+         🔹 BalanceDAO.java
+             public double getBalance(String pin)
+
+         🔹 UserDAO.java
+            public boolean login(String cardNo, String pin)
+            public void signup(String formNo, String cardNumber, String pin)
+            public void changePin(String oldPin, String newPin)      
  Code helps maintain separation of logic and DB operations
 
 //UI Responsiveness Accessibility
