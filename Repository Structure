@@ -1,0 +1,23 @@
+bank.management.system/
+├── DAO/
+│ ├── UserDAO.java # Handles login, signup, pin update
+│ ├── BalanceDAO.java # Calculates account balance
+│ └── TransactionDAO.java # Adds transactions, fetches mini statements
+├── Src
+│ ├── Login.java
+│ ├── SignupOne.java
+│ ├── SignupTwo.java
+│ ├── SignupThree.java
+│ ├── Transactions.java
+│ ├── Deposit.java
+│ ├── Withdrawal.java
+│ ├── FastCash.java
+│ ├── BalanceEnquiry.java
+│ ├── PinChange.java
+│ └── MiniStatement.java
+├── Conn.java # JDBC Connection class
+├── resources/
+│   └── database.sql
+│
+├── README.md
+└── .gitignore
