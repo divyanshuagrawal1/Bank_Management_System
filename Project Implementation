@@ -4,6 +4,13 @@ Schema: banking_system
  Tables:- login(pin, card_number, password)`- `signupthree(pin, account_type)`- `bank(pin, date, type, amount)
  This structure supports login, signup, and transactions
 
+//DAO Classes
+
+Example: -"User.java" holds data for users 
+         -"BalanceDAO.java" has methods like "getBalance(pin)" 
+         -"UserDAO.java" has "updatePin()"
+ Code helps maintain separation of logic and DB operations
+
 //UI Responsiveness Accessibility
 
 Implemented using:- ActionListener for button actions- `JOptionPane` for feedback- Keyboard navigable components
