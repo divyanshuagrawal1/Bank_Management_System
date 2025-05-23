@@ -4,43 +4,54 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+/**
+ * SignupTwo class handles the second page of the account application form.
+ * This page gathers additional user details such as religion, category, income,
+ * education, PAN, Aadhar, etc.
+ */
 public class SignupTwo extends JFrame implements ActionListener {
 
+    // GUI components
     JTextField pan, aadhar;
     JButton next;
     JRadioButton syes, sno, eyes, eno;
     JComboBox religion, category, occupation, education, income;
     String formno;
 
+    // Constructor to initialize the frame and components
     SignupTwo(String formno) {
         this.formno = formno;
         setLayout(null);
         setTitle("New Account Application Form - Page 2");
 
-        // Header Panel
+        // Header panel
         JPanel header = new JPanel();
         header.setBackground(new Color(0, 102, 204));
         header.setBounds(0, 0, 850, 90);
         header.setLayout(null);
         add(header);
 
+        // Logo icon
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/logo.jpg"));
         Image i2 = i1.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
         JLabel logo = new JLabel(new ImageIcon(i2));
         logo.setBounds(30, 5, 80, 80);
         header.add(logo);
 
+        // Bank name
         JLabel bankLabel = new JLabel("NATIONAL BANK OF INDIA");
         bankLabel.setFont(new Font("Verdana", Font.BOLD, 28));
         bankLabel.setForeground(Color.WHITE);
         bankLabel.setBounds(120, 25, 500, 40);
         header.add(bankLabel);
 
+        // Page heading
         JLabel additionalDetails = new JLabel("Page 2: Additional Details");
         additionalDetails.setFont(new Font("Raleway", Font.BOLD, 22));
         additionalDetails.setBounds(280, 100, 400, 30);
         add(additionalDetails);
 
+        // Form fields
         addLabel("Religion:", 160);
         religion = addComboBox(new String[]{"Hindu", "Muslim", "Sikh", "Christian", "Other"}, 160);
 
@@ -77,6 +88,7 @@ public class SignupTwo extends JFrame implements ActionListener {
         accountGroup.add(eyes);
         accountGroup.add(eno);
 
+        // Next button
         next = new JButton("Next");
         next.setBounds(620, 670, 100, 35);
         next.setBackground(new Color(0, 102, 204));
@@ -86,12 +98,14 @@ public class SignupTwo extends JFrame implements ActionListener {
         next.addActionListener(this);
         add(next);
 
+        // Frame settings
         getContentPane().setBackground(new Color(245, 245, 245));
         setSize(850, 800);
         setLocation(350, 10);
         setVisible(true);
     }
 
+    // Method to create labels
     private void addLabel(String text, int y) {
         JLabel label = new JLabel(text);
         label.setFont(new Font("Raleway", Font.BOLD, 18));
@@ -99,6 +113,7 @@ public class SignupTwo extends JFrame implements ActionListener {
         add(label);
     }
 
+    // Method to create text fields
     private JTextField addTextField(int y) {
         JTextField tf = new JTextField();
         tf.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -107,6 +122,7 @@ public class SignupTwo extends JFrame implements ActionListener {
         return tf;
     }
 
+    // Method to create combo boxes
     private JComboBox addComboBox(String[] items, int y) {
         JComboBox box = new JComboBox(items);
         box.setBounds(300, y, 400, 30);
@@ -116,6 +132,7 @@ public class SignupTwo extends JFrame implements ActionListener {
         return box;
     }
 
+    // Method to create radio buttons
     private JRadioButton createRadio(String label, int x, int y) {
         JRadioButton rb = new JRadioButton(label);
         rb.setBounds(x, y, 100, 30);
@@ -125,6 +142,7 @@ public class SignupTwo extends JFrame implements ActionListener {
         return rb;
     }
 
+    // Action performed when next button is clicked
     public void actionPerformed(ActionEvent ae) {
         String sreligion = (String) religion.getSelectedItem();
         String scategory = (String) category.getSelectedItem();
@@ -148,7 +166,9 @@ public class SignupTwo extends JFrame implements ActionListener {
         }
     }
 
+    // Main method for standalone testing
     public static void main(String[] args) {
         new SignupTwo("");
     }
 }
+
