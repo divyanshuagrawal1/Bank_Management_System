@@ -10,12 +10,16 @@ import java.util.*;
 
 public class SignupOne extends JFrame implements ActionListener {
 
+    // Unique form number
     long random;
+
+    // Form input fields
     JTextField nameTextField, fnameTextField, emailTextField, addressTextField, cityTextField, stateTextField, pinTextField;
     JButton next;
     JRadioButton male, female, other, married, unmarried;
     JDateChooser dateChooser;
 
+    // Constructor to set up the form UI
     SignupOne() {
         setLayout(null);
 
@@ -26,18 +30,21 @@ public class SignupOne extends JFrame implements ActionListener {
         header.setLayout(null);
         add(header);
 
+        // Bank logo
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/logo.jpg"));
         Image i2 = i1.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
         JLabel logo = new JLabel(new ImageIcon(i2));
         logo.setBounds(30, 5, 80, 80);
         header.add(logo);
 
+        // Bank title
         JLabel bankLabel = new JLabel("NATIONAL BANK OF INDIA");
         bankLabel.setFont(new Font("Verdana", Font.BOLD, 28));
         bankLabel.setForeground(Color.WHITE);
         bankLabel.setBounds(120, 25, 500, 40);
         header.add(bankLabel);
 
+        // Generate unique application form number
         Random ran = new Random();
         random = Math.abs((ran.nextLong() % 9000L) + 1000L);
 
@@ -51,6 +58,7 @@ public class SignupOne extends JFrame implements ActionListener {
         personDetails.setBounds(300, 140, 400, 30);
         add(personDetails);
 
+        // Form labels and fields
         addLabel("Name:", 180);
         nameTextField = addTextField(180);
 
@@ -109,6 +117,7 @@ public class SignupOne extends JFrame implements ActionListener {
         addLabel("Pin Code:", 630);
         pinTextField = addTextField(630);
 
+        // Next Button
         next = new JButton("Next");
         next.setBackground(new Color(0, 102, 204));
         next.setForeground(Color.WHITE);
@@ -118,13 +127,14 @@ public class SignupOne extends JFrame implements ActionListener {
         next.addActionListener(this);
         add(next);
 
-        
+        // JFrame properties
         setTitle("New Account Application Form");
         setSize(850, 800);
         setLocation(350, 10);
         setVisible(true);
     }
 
+    // Method to add label
     private void addLabel(String text, int y) {
         JLabel label = new JLabel(text);
         label.setFont(new Font("Raleway", Font.BOLD, 18));
@@ -132,6 +142,7 @@ public class SignupOne extends JFrame implements ActionListener {
         add(label);
     }
 
+    // Method to add text field
     private JTextField addTextField(int y) {
         JTextField tf = new JTextField();
         tf.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -140,11 +151,13 @@ public class SignupOne extends JFrame implements ActionListener {
         return tf;
     }
 
+    // Method to style radio buttons
     private void styleRadio(JRadioButton rb) {
         rb.setBackground(new Color(245, 245, 245));
         rb.setFont(new Font("Arial", Font.PLAIN, 14));
     }
 
+    // Action listener for the "Next" button
     public void actionPerformed(ActionEvent ae) {
         String formno = "" + random;
         String name = nameTextField.getText();
@@ -161,16 +174,19 @@ public class SignupOne extends JFrame implements ActionListener {
         String pin = pinTextField.getText();
 
         try {
+            // Validation for empty fields
             if (name.isEmpty() || fname.isEmpty() || dob.isEmpty() || gender == null || email.isEmpty() ||
                 marital == null || address.isEmpty() || city.isEmpty() || state.isEmpty() || pin.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please fill all required fields");
                 return;
             }
 
+            // Insert data into database
             Conn c = new Conn();
             String query = "INSERT INTO signup VALUES('" + formno + "','" + name + "','" + fname + "','" + dob + "','" + gender + "','" + email + "','" + marital + "','" + address + "','" + city + "','" + pin + "','" + state + "')";
             c.s.executeUpdate(query);
 
+            // Open next form
             setVisible(false);
             new SignupTwo(formno).setVisible(true);
 
@@ -179,6 +195,7 @@ public class SignupOne extends JFrame implements ActionListener {
         }
     }
 
+    // Main method to launch the form
     public static void main(String args[]) {
         new SignupOne();
     }
