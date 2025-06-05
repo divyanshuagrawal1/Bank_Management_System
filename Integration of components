@@ -1,0 +1,30 @@
+/**
+ * Main transaction hub integrating all banking operations
+ * Seamlessly connects with:
+ * - Deposit/Withdrawal modules
+ * - PIN change functionality
+ * - Balance inquiry
+ * - Statement generation
+ */
+public class Transactions extends JFrame implements ActionListener {
+    // ... existing code ...
+    
+    public void actionPerformed(ActionEvent ae) {
+        try {
+            if (ae.getSource() == deposit) {
+                new Deposit(pinnumber).setVisible(true);
+                dispose();
+            } 
+            else if (ae.getSource() == pinchange) {
+                new PinChange(pinnumber).setVisible(true);
+                dispose();
+            }
+            // ... other actions ...
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, 
+                "Operation failed: " + e.getMessage(), 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
