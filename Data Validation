@@ -1,0 +1,51 @@
+/**
+ * Handles user data operations with comprehensive validation
+ * Implements both client and server-side validation
+ */
+public class UserDAO implements AutoCloseable {
+    // ... existing code ...
+    
+    /**
+     * Validates and changes user PIN
+     * @throws IllegalArgumentException for invalid PIN formats
+     * @throws SQLException for database errors
+     */
+    public void changePin(String oldPin, String newPin) 
+        throws SQLException, IllegalArgumentException {
+        
+        // Server-side validation
+        if (newPin == null || !newPin.matches("\\d{4}")) {
+            throw new IllegalArgumentException("PIN must be 4 digits");
+        }
+        
+        if (newPin.equals(oldPin)) {
+            throw new IllegalArgumentException("New PIN must be different");
+        }
+        
+        try {
+            conn.setAutoCommit(false);
+            
+            String query = "UPDATE login SET pin = ? WHERE pin = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setString(1, hashPin(newPin));
+                stmt.setString(2, hashPin(oldPin));
+                if (stmt.executeUpdate() == 0) {
+                    throw new SQLException("PIN change failed - user not found");
+                }
+            }
+            
+            // Update transaction records
+            String query2 = "UPDATE bank SET pin = ? WHERE pin = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(query2)) {
+                stmt.setString(1, newPin);
+                stmt.setString(2, oldPin);
+                stmt.executeUpdate();
+            }
+            
+            conn.commit();
+        } catch (SQLException e) {
+            conn.rollback();
+            throw e;
+        }
+    }
+}
