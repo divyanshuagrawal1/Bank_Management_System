@@ -1,0 +1,53 @@
+/**
+ * Data Access Object for transaction operations
+ * Implements robust error handling and transaction management
+ */
+public class TransactionDAO implements AutoCloseable {
+    private Connection conn;
+    
+    public TransactionDAO() throws SQLException {
+        try {
+            conn = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/bankmanagementsystem", 
+                "root", 
+                "Divyan@2006"
+            );
+        } catch (SQLException e) {
+            throw new SQLException("Failed to connect to database", e);
+        }
+    }
+    
+    /**
+     * Records a new transaction with validation
+     * @throws SQLException for database errors
+     * @throws IllegalArgumentException for invalid inputs
+     */
+    public void addTransaction(String pin, String type, double amount) 
+        throws SQLException, IllegalArgumentException {
+        
+        if (!type.equals("Deposit") && !type.equals("Withdrawal")) {
+            throw new IllegalArgumentException("Invalid transaction type");
+        }
+        
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Amount must be positive");
+        }
+        
+        String query = "INSERT INTO bank(pin, date, type, amount) VALUES (?, NOW(), ?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, pin);
+            stmt.setString(2, type);
+            stmt.setDouble(3, amount);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new SQLException("Failed to record transaction", e);
+        }
+    }
+    
+    @Override
+    public void close() throws SQLException {
+        if (conn != null) {
+            conn.close();
+        }
+    }
+}
