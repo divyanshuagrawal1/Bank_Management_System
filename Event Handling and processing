@@ -1,0 +1,33 @@
+/**
+ * Registration form with efficient event handling
+ * Uses single action listener with event delegation
+ */
+public class SignupOne extends JFrame implements ActionListener {
+    // ... existing fields ...
+    
+    public SignupOne() {
+        // ... initialization ...
+        
+        // Consolidated event listeners
+        next.addActionListener(this);
+        male.addActionListener(e -> validateGenderSelection());
+        female.addActionListener(e -> validateGenderSelection());
+        
+        // Input validation on focus loss
+        pinTextField.addFocusListener(new FocusAdapter() {
+            public void focusLost(FocusEvent e) {
+                if (!pinTextField.getText().matches("\\d{6}")) {
+                    showValidationError(pinTextField, "Invalid PIN (6 digits required)");
+                }
+            }
+        });
+    }
+    
+    private void validateGenderSelection() {
+        if (!male.isSelected() && !female.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Please select gender");
+        }
+    }
+    
+    // ... rest of the code ...
+}
