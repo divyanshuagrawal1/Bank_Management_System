@@ -1,0 +1,55 @@
+/**
+ * Centralized UI styling for consistent look and feel
+ * Implements innovative theming and reusable components
+ */
+public final class BankStyles {
+    // Private constructor to prevent instantiation
+    private BankStyles() {}
+    
+    // Color scheme
+    public static final Color PRIMARY_COLOR = new Color(0, 102, 204);
+    public static final Color SECONDARY_COLOR = new Color(70, 130, 180);
+    public static final Color ERROR_COLOR = new Color(220, 53, 69);
+    
+    // Font scheme
+    public static final Font HEADER_FONT = new Font("Segoe UI", Font.BOLD, 24);
+    public static final Font BODY_FONT = new Font("Segoe UI", Font.PLAIN, 14);
+    
+    /**
+     * Styles buttons consistently across application
+     * @param button The button to style
+     * @param type "primary" or "secondary"
+     */
+    public static void styleButton(JButton button, String type) {
+        button.setFont(BODY_FONT);
+        button.setFocusPainted(false);
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        
+        switch (type.toLowerCase()) {
+            case "primary":
+                button.setBackground(PRIMARY_COLOR);
+                button.setForeground(Color.WHITE);
+                break;
+            case "secondary":
+                button.setBackground(SECONDARY_COLOR);
+                button.setForeground(Color.WHITE);
+                break;
+            default:
+                button.setBackground(Color.LIGHT_GRAY);
+        }
+    }
+    
+    /**
+     * Creates a standardized input field
+     * @return Configured JTextField
+     */
+    public static JTextField createInputField() {
+        JTextField field = new JTextField();
+        field.setFont(BODY_FONT);
+        field.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(Color.GRAY),
+            BorderFactory.createEmptyBorder(5, 10, 5, 10)
+        ));
+        return field;
+    }
+}
