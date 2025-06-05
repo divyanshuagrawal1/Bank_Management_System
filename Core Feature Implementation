@@ -1,0 +1,40 @@
+/**
+ * Handles user authentication with secure credential validation
+ * Core Features:
+ * - Secure login with card number and PIN
+ * - Clear and signup options
+ * - SQL injection protection
+ */
+public class Login extends JFrame implements ActionListener {
+    // ... existing code ...
+    
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == login) {
+            try (UserDAO userDAO = new UserDAO()) {
+                String cardnumber = cardTextField.getText();
+                char[] pinChars = pinTextField.getPassword();
+                
+                // Core validation
+                if (cardnumber.length() != 16 || !cardnumber.matches("\\d+")) {
+                    JOptionPane.showMessageDialog(null, "Invalid card number (16 digits required)");
+                    return;
+                }
+                
+                if (pinChars.length != 4) {
+                    JOptionPane.showMessageDialog(null, "PIN must be 4 digits");
+                    return;
+                }
+                
+                if (userDAO.login(cardnumber, new String(pinChars))) {
+                    new Transactions(new String(pinChars)).setVisible(true);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid credentials");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Login failed: " + e.getMessage());
+            }
+        }
+        // ... other actions ...
+    }
+}
